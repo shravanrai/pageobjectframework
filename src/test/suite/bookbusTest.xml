@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite" thread-count="2" parallel="tests">
+    <test name="halodocChrome">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="isRemoteDriver" value="true"/>
+        <classes>
+            <class name="com.hldoc.scenarios.BusOnlineTicketTest"/>
+        </classes>
+    </test>
+    <test name="halodocFireFox">
+        <parameter name="browserName" value="firefox"/>
+        <parameter name="isRemoteDriver" value="true"/>
+        <classes>
+            <class name="com.hldoc.scenarios.BusOnlineTicketTest"/>
+        </classes>
+    </test><!--
+    <test name="halodocOpera">
+        <parameter name="browserName" value="opera"/>
+        <parameter name="isRemoteDriver" value="true"/>
+        <classes>
+            <class name="com.hldoc.scenarios.BusOnlineTicketTest"/>
+        </classes>
+    </test>-->
+</suite>
