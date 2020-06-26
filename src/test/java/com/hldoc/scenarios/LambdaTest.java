@@ -17,7 +17,7 @@ public class LambdaTest {
             System.out.println("n = " + n);
         });*/
 
-       //stream.map(x->x*x).forEach(y-> System.out.println("y = " + y));
+        //stream.map(x->x*x).forEach(y-> System.out.println("y = " + y));
         int reduce = stream.reduce(0, (ans, i) -> ans + i);
         System.out.println("reduce = " + reduce);
     }

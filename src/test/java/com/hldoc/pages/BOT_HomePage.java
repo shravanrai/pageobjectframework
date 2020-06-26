@@ -12,595 +12,445 @@ import java.util.List;
 import java.util.Map;
 
 public class BOT_HomePage {
+    private final String oneWayValue = "radOneWay";
+    private final String pageLoadedText = "You only need to select your origin, destinations, number of pax and departure date and we will provide you with the list of available trips for booking";
+    private final String pageUrl = "/booking/bus-tickets.aspx";
+    private final String returnValue = "radRoundTrip";
     private Map<String, String> data;
     private WebDriver driver;
     private int timeout = 15;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/about-us']")
     @CacheLookup
     private WebElement aboutUs;
-
     @FindBy(css = "a[title='Adam Express']")
     @CacheLookup
     private WebElement adamExpress;
-
     @FindBy(id = "ContentPlaceHolder1_txtDepartDate")
     @CacheLookup
     private WebElement addAHotel1;
-
     @FindBy(id = "ContentPlaceHolder1_txtReturnDate")
     @CacheLookup
     private WebElement addAHotel2;
-
     @FindBy(id = "ContentPlaceHolder1_qty")
     @CacheLookup
     private WebElement addAHotel3;
-
     @FindBy(id = "txtOrigin")
     @CacheLookup
     private WebElement addAHotel4;
-
     @FindBy(id = "txtDestination")
     @CacheLookup
     private WebElement addAHotel5;
-
     @FindBy(id = "cbAddSearchHotel")
     @CacheLookup
     private WebElement addAHotel6;
-
     @FindBy(css = "a[title='Adik Beradik Express']")
     @CacheLookup
     private WebElement adikBeradikExpress;
-
     @FindBy(css = "a[title='Aerobus']")
     @CacheLookup
     private WebElement aerobus;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/busonlineticket-affiliates-program']")
     @CacheLookup
     private WebElement affiliateProgram;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/booking/agent-registration.aspx']")
     @CacheLookup
     private WebElement agentRegistration;
-
     @FindBy(css = "a[title='Airport Coach']")
     @CacheLookup
     private WebElement airportCoach;
-
     @FindBy(css = "#menu-item-10915 a")
     @CacheLookup
     private WebElement airportTransfer1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) ul:nth-of-type(1) li:nth-of-type(5) a")
     @CacheLookup
     private WebElement airportTransfer2;
-
     @FindBy(css = "a[title='Al Ameen Boat Service']")
     @CacheLookup
     private WebElement alAmeenBoatService;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/alipay-payment-guide']")
     @CacheLookup
     private WebElement alipayPaymentGuide;
-
     @FindBy(css = "a[title='Alisan Golden Coach ']")
     @CacheLookup
     private WebElement alisanGoldenCoach;
-
     @FindBy(css = "a[title='Alya Express']")
     @CacheLookup
     private WebElement alyaExpress;
-
     @FindBy(css = "a[title='Antar Holiday']")
     @CacheLookup
     private WebElement antarHoliday;
-
     @FindBy(css = "a[title='Arwana Express']")
     @CacheLookup
     private WebElement arwanaExpress;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/axs-payment-guide']")
     @CacheLookup
     private WebElement axsPaymentGuide;
-
     @FindBy(css = "a[title='AYU EXPRESS']")
     @CacheLookup
     private WebElement ayuExpress;
-
     @FindBy(css = "a[title='AZ LINER']")
     @CacheLookup
     private WebElement azLiner;
-
     @FindBy(css = "#main-header div:nth-of-type(2) div.container div.row div:nth-of-type(2) div:nth-of-type(1) ul li:nth-of-type(2) a")
     @CacheLookup
     private WebElement bahasaMalaysia;
-
     @FindBy(css = "a[title='Batam Fast Ferry Pte Ltd']")
     @CacheLookup
     private WebElement batamFastFerryPteLtd;
-
     @FindBy(css = "a[title='Beh Travel & Tours Sdn Bhd']")
     @CacheLookup
     private WebElement behTravelToursSdnBhd;
-
     @FindBy(css = "a[title='Biaramas Express']")
     @CacheLookup
     private WebElement biaramasExpress;
-
     @FindBy(css = "a[title='Billion Stars']")
     @CacheLookup
     private WebElement billionStars;
-
     @FindBy(css = "a[title='Bintan Resort Ferry']")
     @CacheLookup
     private WebElement bintanResortFerry;
-
     @FindBy(css = "a[title='Bintang Jaya Express']")
     @CacheLookup
     private WebElement bintangJayaExpress;
-
     @FindBy(id = "btnBusSearchNew")
     @CacheLookup
     private WebElement bookNow;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/faq']")
     @CacheLookup
     private WebElement bookingFaq;
-
     @FindBy(css = "a[title='Bundhaya Speed Boat']")
     @CacheLookup
     private WebElement bundhayaSpeedBoat;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/bus-chartering-service']")
     @CacheLookup
     private WebElement busCharter;
-
     @FindBy(css = "#menu-item-10914 a")
     @CacheLookup
     private WebElement busHotel1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) ul:nth-of-type(1) li:nth-of-type(2) a")
     @CacheLookup
     private WebElement busHotel2;
-
     @FindBy(css = "#menu-item-24683 a")
     @CacheLookup
     private WebElement busOperator;
-
     @FindBy(css = "a[title='Bus Operators on BusOnlineticket.com']")
     @CacheLookup
     private WebElement busOperators1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(1) ul.widget-list li:nth-of-type(3) a")
     @CacheLookup
     private WebElement busOperators2;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/bus-route']")
     @CacheLookup
     private WebElement busRoute;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/bus-terminal']")
     @CacheLookup
     private WebElement busTerminal;
-
     @FindBy(css = "#menu-item-10909 a")
     @CacheLookup
     private WebElement busTickets1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) ul:nth-of-type(1) li:nth-of-type(1) a")
     @CacheLookup
     private WebElement busTickets2;
-
     @FindBy(css = "#main-header div:nth-of-type(2) div.container div.row div:nth-of-type(1) div.hidden-lg.hidden-md.hidden-sm.text-center a:nth-of-type(1)")
     @CacheLookup
     private WebElement busonlineticketCom1;
-
     @FindBy(css = "#main-footer div:nth-of-type(2) a:nth-of-type(1)")
     @CacheLookup
     private WebElement busonlineticketCom2;
-
     @FindBy(css = "a[title='C.S Travel & Tours']")
     @CacheLookup
     private WebElement cSTravelTours;
-
     @FindBy(css = "a[title='Causeway Link Express']")
     @CacheLookup
     private WebElement causewayLinkExpress;
-
     @FindBy(css = "a[title='Cepat Express']")
     @CacheLookup
     private WebElement cepatExpress;
-
     @FindBy(css = "#liNonMember3 a")
     @CacheLookup
     private WebElement checkMyBooking;
-
     @FindBy(css = "a[title='Citra Indomas']")
     @CacheLookup
     private WebElement citraIndomas;
-
     @FindBy(css = "a[title='City Holidays Express']")
     @CacheLookup
     private WebElement cityHolidaysExpress;
-
     @FindBy(css = "a[title='99 Coachland Express']")
     @CacheLookup
     private WebElement coachlandExpress99;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/contact-us']")
     @CacheLookup
     private WebElement contactUs;
-
     @FindBy(css = "a[title='Cosmic Express']")
     @CacheLookup
     private WebElement cosmicExpress;
-
     @FindBy(css = "a[title='D Amour Enterprise']")
     @CacheLookup
     private WebElement dAmourEnterprise;
-
     @FindBy(css = "a[title='Darul Iman Express']")
     @CacheLookup
     private WebElement darulImanExpress;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/dbs-paylah-payment-guide']")
     @CacheLookup
     private WebElement dbsPaylahGuide;
-
     @FindBy(css = "a[title='Delima Express (MY)']")
     @CacheLookup
     private WebElement delimaExpressMy;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/destinations']")
     @CacheLookup
     private WebElement destinations;
-
     @FindBy(css = "a[title='Discovery Tours']")
     @CacheLookup
     private WebElement discoveryTours;
-
     @FindBy(css = "a[title='Economy Express']")
     @CacheLookup
     private WebElement economyExpress;
-
     @FindBy(css = "a[title='Edaran Express']")
     @CacheLookup
     private WebElement edaranExpress;
-
     @FindBy(css = "a[title='Ekspres Musafir']")
     @CacheLookup
     private WebElement ekspresMusafir;
-
     @FindBy(css = "a[title='Eltabina Jaya Express']")
     @CacheLookup
     private WebElement eltabinaJayaExpress;
-
     @FindBy(css = "a[title='E-Mutiara']")
     @CacheLookup
     private WebElement emutiara;
-
     @FindBy(css = "#main-header div:nth-of-type(1) div.container div:nth-of-type(1) ul.list-inline li:nth-of-type(1) a")
     @CacheLookup
     private WebElement eng;
-
     @FindBy(css = "#main-header div:nth-of-type(2) div.container div.row div:nth-of-type(2) div:nth-of-type(1) ul li:nth-of-type(1) a")
     @CacheLookup
     private WebElement english;
-
     @FindBy(css = "a[title='Etika Express']")
     @CacheLookup
     private WebElement etikaExpress;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/ferry-route']")
     @CacheLookup
     private WebElement ferryRoute;
-
     @FindBy(css = "#menu-item-10911 a")
     @CacheLookup
     private WebElement ferryTickets1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) ul:nth-of-type(1) li:nth-of-type(4) a")
     @CacheLookup
     private WebElement ferryTickets2;
-
     @FindBy(css = "a[title='First Coach']")
     @CacheLookup
     private WebElement firstCoach;
-
     @FindBy(css = "a[title='GJG Express ']")
     @CacheLookup
     private WebElement gjgExpress;
-
     @FindBy(css = "a[title='Golden Coach Express']")
     @CacheLookup
     private WebElement goldenCoachExpress;
-
     @FindBy(css = "a[title='Han Travel ']")
     @CacheLookup
     private WebElement hanTravel;
-
     @FindBy(css = "#menu-item-12 a")
     @CacheLookup
     private WebElement home1;
-
     @FindBy(css = "#breadcrumbs span span a")
     @CacheLookup
     private WebElement home2;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(1) ul.widget-list li:nth-of-type(1) a")
     @CacheLookup
     private WebElement home3;
-
     @FindBy(css = "#menu-item-10913 a")
     @CacheLookup
     private WebElement hotels1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) ul:nth-of-type(1) li:nth-of-type(8) a")
     @CacheLookup
     private WebElement hotels2;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/how-to-book']")
     @CacheLookup
     private WebElement howToBook;
-
     @FindBy(css = "a[title='IGS Ferry']")
     @CacheLookup
     private WebElement igsFerry;
-
     @FindBy(css = "a[title='707 Inc']")
     @CacheLookup
     private WebElement inc707;
-
     @FindBy(css = "a[title='Inter Top Express']")
     @CacheLookup
     private WebElement interTopExpress;
-
     @FindBy(css = "a[title='Intercity Coach']")
     @CacheLookup
     private WebElement intercityCoach;
-
     @FindBy(css = "a[title='Jadam Express']")
     @CacheLookup
     private WebElement jadamExpress;
-
     @FindBy(css = "a[title='Jasa Pelangi Ekspres']")
     @CacheLookup
     private WebElement jasaPelangiEkspres;
-
     @FindBy(css = "a[title='Jasmine Express']")
     @CacheLookup
     private WebElement jasmineExpress;
-
     @FindBy(css = "a[title='JB Transliner']")
     @CacheLookup
     private WebElement jbTransliner;
-
     @FindBy(css = "a[title='Jengka Liner']")
     @CacheLookup
     private WebElement jengkaLiner;
-
     @FindBy(css = "a[title='Jet Bus']")
     @CacheLookup
     private WebElement jetBus;
-
     @FindBy(css = "a[title='Joo Seng Travel']")
     @CacheLookup
     private WebElement jooSengTravel;
-
     @FindBy(css = "a[title='Kejora Express']")
     @CacheLookup
     private WebElement kejoraExpress;
-
     @FindBy(css = "a[title='Kesatuan Express']")
     @CacheLookup
     private WebElement kesatuanExpress;
-
     @FindBy(css = "a[title='KKKL Express (Terus Nanti)']")
     @CacheLookup
     private WebElement kkklExpressTerusNanti;
-
     @FindBy(css = "a[title='KKKL Travel & Tours Pte Ltd']")
     @CacheLookup
     private WebElement kkklTravelToursPteLtd;
-
     @FindBy(css = "a[title='Konsortium Express']")
     @CacheLookup
     private WebElement konsortiumExpress;
-
     @FindBy(css = "a[title='KPB Express']")
     @CacheLookup
     private WebElement kpbExpress;
-
     @FindBy(css = "a[title='KPB Seremban Enterprise']")
     @CacheLookup
     private WebElement kpbSerembanEnterprise;
-
     @FindBy(css = "a[title='Kulim First Travel']")
     @CacheLookup
     private WebElement kulimFirstTravel;
-
     @FindBy(css = "a[title='Kwok Ping Express  JB']")
     @CacheLookup
     private WebElement kwokPingExpressJb;
-
     @FindBy(css = "a[title='LA Holidays']")
     @CacheLookup
     private WebElement laHolidays;
-
     @FindBy(css = "a[title='Lapan Lapan Travel']")
     @CacheLookup
     private WebElement lapanLapanTravel;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/promotions']")
     @CacheLookup
     private WebElement latestPromotion;
-
     @FindBy(css = "a[title='Lienadia Express']")
     @CacheLookup
     private WebElement lienadiaExpress;
-
     @FindBy(css = "a[title='Limbongan Maju ']")
     @CacheLookup
     private WebElement limbonganMaju;
-
     @FindBy(css = "#liNonMember1 a")
     @CacheLookup
     private WebElement logIn;
-
     @FindBy(css = "#menu-item-24681 a")
     @CacheLookup
     private WebElement login;
-
     @FindBy(css = "#menu-item-24682 a")
     @CacheLookup
     private WebElement loyaltyProgram1;
-
     @FindBy(css = "#main-footer div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(1) ul.widget-list li:nth-of-type(9) a")
     @CacheLookup
     private WebElement loyaltyProgram2;
-
     @FindBy(css = "a[title='LPMS Express']")
     @CacheLookup
     private WebElement lpmsExpress;
-
     @FindBy(css = "a[title='Luxury Coach ']")
     @CacheLookup
     private WebElement luxuryCoach;
-
     @FindBy(css = "a[title='Maharani Express']")
     @CacheLookup
     private WebElement maharaniExpress;
-
     @FindBy(css = "a[title='Majestic Fast Ferry Pte Ltd']")
     @CacheLookup
     private WebElement majesticFastFerryPteLtd;
-
     @FindBy(css = "a[title='Maju Express']")
     @CacheLookup
     private WebElement majuExpress;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/manage-my-booking']")
     @CacheLookup
     private WebElement manageMyBooking;
-
     @FindBy(css = "a[title='Manis Liner Express']")
     @CacheLookup
     private WebElement manisLinerExpress;
-
     @FindBy(css = "a[title='Maraliner']")
     @CacheLookup
     private WebElement maraliner;
-
     @FindBy(css = "a[title='Mayang Sari Express']")
     @CacheLookup
     private WebElement mayangSariExpress;
-
     @FindBy(css = "a[title='Melor Interline Express']")
     @CacheLookup
     private WebElement melorInterlineExpress;
-
     @FindBy(css = "a[title='Meridian Holidays']")
     @CacheLookup
     private WebElement meridianHolidays;
-
     @FindBy(css = "#main-header div:nth-of-type(1) div.container div:nth-of-type(1) ul.list-inline li:nth-of-type(2) a")
     @CacheLookup
     private WebElement mly;
-
     @FindBy(css = "a[title='Naik Selalu Express']")
     @CacheLookup
     private WebElement naikSelaluExpress;
-
     @FindBy(css = "a[title='Neoliner Express']")
     @CacheLookup
     private WebElement neolinerExpress;
-
     @FindBy(css = "a[title='New Asian Travel']")
     @CacheLookup
     private WebElement newAsianTravel;
-
     @FindBy(css = "a[title='NKS Hotel and Travel ']")
     @CacheLookup
     private WebElement nksHotelAndTravel;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/plus-user-guide']")
     @CacheLookup
     private WebElement ntucPlusGuide;
-
     @FindBy(name = "ctl00$ContentPlaceHolder1$way")
     @CacheLookup
     private List<WebElement> oneWay;
-
-    private final String oneWayValue = "radOneWay";
-
     @FindBy(css = "a[title='Orkid Malaysia Express']")
     @CacheLookup
     private WebElement orkidMalaysiaExpress;
-
-    private final String pageLoadedText = "You only need to select your origin, destinations, number of pax and departure date and we will provide you with the list of available trips for booking";
-
-    private final String pageUrl = "/booking/bus-tickets.aspx";
-
     @FindBy(css = "a[title='Pahang Lin Siong']")
     @CacheLookup
     private WebElement pahangLinSiong;
-
     @FindBy(css = "a[title='Pasir Gudang Ferry']")
     @CacheLookup
     private WebElement pasirGudangFerry;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/paypal-guide']")
     @CacheLookup
     private WebElement paypalPaymentGuide;
-
     @FindBy(css = "a[title='Perak Transit']")
     @CacheLookup
     private WebElement perakTransit;
-
     @FindBy(css = "a[title='Perdana Express']")
     @CacheLookup
     private WebElement perdanaExpress;
-
     @FindBy(css = "a[title='Perhentian Trans Holiday']")
     @CacheLookup
     private WebElement perhentianTransHoliday;
-
     @FindBy(css = "a[title='Persada Travel and Tours']")
     @CacheLookup
     private WebElement persadaTravelAndTours;
-
     @FindBy(css = "a[title='Plusliner']")
     @CacheLookup
     private WebElement plusliner;
-
     @FindBy(css = "#content div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) div:nth-of-type(3) div:nth-of-type(2) div.list-group a:nth-of-type(1)")
     @CacheLookup
     private WebElement popularBusTicketsFromMalaysia;
-
     @FindBy(css = "#content div:nth-of-type(1) div:nth-of-type(1) div:nth-of-type(2) div:nth-of-type(3) div:nth-of-type(1) div.list-group a:nth-of-type(1)")
     @CacheLookup
     private WebElement popularBusTicketsFromSingapore;
-
     @FindBy(css = "a[title='Prisma Express']")
     @CacheLookup
     private WebElement prismaExpress;
-
     @FindBy(css = "a[href='https://www.busonlineticket.com/privacy-policy']")
     @CacheLookup
     private WebElement privacyPolicy;
-
     @FindBy(css = "a[title='Queen Express']")
     @CacheLookup
     private WebElement queenExpress;
-
     @FindBy(css = "a[title='Quick Liner Express']")
     @CacheLookup
     private WebElement quickLinerExpress;
-
-
-    private final String returnValue = "radRoundTrip";
-
     @FindBy(css = "a[title='Kuala Lumpur-Malacca']")
     @CacheLookup
     private WebElement rm1000busFromKlToMalacca;

@@ -16,17 +16,18 @@ import java.net.URL;
 public class SingletonDriver {
 
     static WebDriver driver;
-    public static WebDriver getSingletonChromeDriver(){
-        if(driver==null){
-            Boolean setCapabilties=false;
-            if (setCapabilties){
+
+    public static WebDriver getSingletonChromeDriver() {
+        if (driver == null) {
+            Boolean setCapabilties = false;
+            if (setCapabilties) {
                 ChromeOptions chromeOptions = new ChromeOptions();
  /*               chromeOptions.setCapability(CapabilityType.APPLICATION_NAME, "name");
                 chromeOptions.setProxy(new Proxy().setHttpProxy("<HOST:PORT>"));
                 chromeOptions.setAcceptInsecureCerts(false);
                 chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 */
-            //chromeOptions.addArguments("--headless");
+                //chromeOptions.addArguments("--headless");
                 //chromeOptions.addArguments("disable-infobars");
                 //chromeOptions.addArguments("disable-images");
                 //chromeOptions.addExtensions("");
@@ -51,26 +52,26 @@ public class SingletonDriver {
                 desiredCapabilities.merge(chromeOptions);
 
                 driver = new ChromeDriver(chromeOptions);
-            }else{
+            } else {
                 driver = new ChromeDriver();
             }
         }
         return driver;
     }
 
-    public  static WebDriver getSingletonFirefoxDriver(){
-        if(driver==null){
-            System.setProperty("webdriver.gecko.driver","/home/shravan/Documents/selenium4_browsers/geckodriver-v0.26.0-linux64/geckodriver");
-            driver=new FirefoxDriver();
+    public static WebDriver getSingletonFirefoxDriver() {
+        if (driver == null) {
+            System.setProperty("webdriver.gecko.driver", "/home/shravan/Documents/selenium4_browsers/geckodriver-v0.26.0-linux64/geckodriver");
+            driver = new FirefoxDriver();
         }
         return driver;
     }
 
-    public static WebDriver getSingletonIEDriver(){
-        if(driver==null){
+    public static WebDriver getSingletonIEDriver() {
+        if (driver == null) {
             //need to update the path
-            System.setProperty("webdriver.ie.driver","/home/shravan/Documents/selenium4_browsers/geckodriver-v0.26.0-linux64/geckodriver");
-            driver=new InternetExplorerDriver();
+            System.setProperty("webdriver.ie.driver", "/home/shravan/Documents/selenium4_browsers/geckodriver-v0.26.0-linux64/geckodriver");
+            driver = new InternetExplorerDriver();
         }
         return driver;
     }
@@ -84,12 +85,12 @@ public class SingletonDriver {
          *
          * java -jar lib/selenium-server-standalone-2.43.1.jar -role node  -hub http://localhost:4444/grid/register -port 7777
          */
-        if(driver==null){
-            try{
+        if (driver == null) {
+            try {
                 URL remoteAddress = new URL("");
                 Capabilities desiredCapabilities = new DesiredCapabilities();
-                driver=new RemoteWebDriver(remoteAddress, desiredCapabilities);
-            }catch (MalformedURLException e) {
+                driver = new RemoteWebDriver(remoteAddress, desiredCapabilities);
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 

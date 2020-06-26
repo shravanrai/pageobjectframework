@@ -20,55 +20,55 @@ import java.util.function.Function;
 import java.util.logging.Logger;
 
 public class Helper {
-    Logger logger=Logger.getLogger(Helper.class.getName());
-
+    public FluentWait<WebDriver> fluentWait;
+    Logger logger = Logger.getLogger(Helper.class.getName());
     WebDriver driver;
     WebDriverWait webDriverWait;
     Actions actions;
-    public FluentWait<WebDriver> fluentWait;
 
     public Helper(WebDriver driver) {
         this.driver = driver;
-      //  webDriverWait= new WebDriverWait(driver,10);
-     //  actions = new Actions(driver);
+        //  webDriverWait= new WebDriverWait(driver,10);
+        //  actions = new Actions(driver);
     }
 
-    public WebElement waitForElementToBeClickable(WebElement ele)  {
+    public WebElement waitForElementToBeClickable(WebElement ele) {
         return webDriverWait.until(ExpectedConditions.visibilityOf(ele));
     }
 
     public void hoverOverElement(WebElement ele) throws InterruptedException {
         actions = new Actions(driver);
-        for (int i = 0; i <5 ; i++) {
+        for (int i = 0; i < 5; i++) {
             actions.moveToElement(ele).moveToElement(ele).perform();
             Thread.sleep(100l);
         }
-        }
+    }
 
     public void takeElementScreenshot(WebElement ele) throws IOException {
         File screenshotAs = ele.getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshotAs, new File("/"+ele.getAttribute("text")+".png"));
+        FileUtils.copyFile(screenshotAs, new File("/" + ele.getAttribute("text") + ".png"));
     }
 
     public void takePageVisibleScreenshot() throws IOException {
 
-        File screenshotAs = ((TakesScreenshot)this.driver).getScreenshotAs(OutputType.FILE);
+        File screenshotAs = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
 
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         String format = simpleDateFormat.format(date);
 
-       // FileUtils.copyFile(screenshotAs, new File("user.dir"+"/"+format+".png"));
-        FileHandler.copy(screenshotAs, new File(System.getProperty("user.dir")+"/"+format+".png"));
+        // FileUtils.copyFile(screenshotAs, new File("user.dir"+"/"+format+".png"));
+        FileHandler.copy(screenshotAs, new File(System.getProperty("user.dir") + "/target/screenshots" + format + ".png"));
 
     }
 
     public void takeFullScreenScreenshot(WebElement ele) throws IOException {
 
-        File screenshotAs = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshotAs, new File("/"+ele.getAttribute("text")+".png"));
+        File screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshotAs, new File("/" + ele.getAttribute("text") + ".png"));
     }
-    public void useFluentWait(WebElement ele){
+
+    public void useFluentWait(WebElement ele) {
         fluentWait = new FluentWait<>(driver);
         fluentWait.ignoring(NoSuchElementException.class).pollingEvery(Duration.ofSeconds(5)).withTimeout(Duration.ofSeconds(30));
 
@@ -83,26 +83,26 @@ public class Helper {
     }
 
     public void highlightElement(WebElement ele) throws InterruptedException {
-        JavascriptExecutor js=(JavascriptExecutor)driver;
-        for (int i = 0; i <4 ; i++) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for (int i = 0; i < 4; i++) {
             js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", ele);
             Thread.sleep(100l);
             js.executeScript("arguments[0].setAttribute('style', '');", ele);
         }
-      }
+    }
 
-      //AutoId
-      public void updaloadFile() throws IOException {
-          Runtime.getRuntime().exec("D:\\SoftwareTestingMaterial\\AutoIt\\Uploadfile.exe");
-      }
+    //AutoId
+    public void updaloadFile() throws IOException {
+        Runtime.getRuntime().exec("D:\\SoftwareTestingMaterial\\AutoIt\\Uploadfile.exe");
+    }
 
-      public void downloadFile(){
+    public void downloadFile() {
 
-      }
+    }
 
 
     public void connectToNySQLDB(String sqlQuery) throws SQLException {
-        Driver mysqlDriver  = new Driver();
+        Driver mysqlDriver = new Driver();
         DriverManager.registerDriver(mysqlDriver);
         Connection connection = DriverManager.getConnection("10.3.43.22", "root", "passwd");
         Statement statement = connection.createStatement();
@@ -111,7 +111,7 @@ public class Helper {
     }
 
 
-    public void setChomeDesiredCapabilities(){
+    public void setChomeDesiredCapabilities() {
 /*        DesiredCapabilities desiredCapabilities = new DesiredCapabilities.chrome();
         desiredCapabilities.setCapability(Capabilities.);
 
@@ -122,7 +122,6 @@ public class Helper {
         chromeOptions.addArguments("disable-infobars");*/
 
     }
-
 
 
 }

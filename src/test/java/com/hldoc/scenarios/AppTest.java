@@ -28,7 +28,7 @@ public class AppTest {
         ThreadLocal<WebDriver> WebDriver = new ThreadLocal<>();
         WebDriver.set(new shravan1BrowserFactory().getBrowser(browser));
         driver = WebDriver.get();
-     //   driver=new ChromeDriver();
+        //   driver=new ChromeDriver();
     }
 
 /*

@@ -11,9 +11,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SearchResults extends TestBase {
-    Logger logger = Logger.getLogger(SearchResults.class.getName());
-
     public static WebDriver driver;
+    Logger logger = Logger.getLogger(SearchResults.class.getName());
     WebElement resultToBeProceededWith = null;
 
     @FindBy(xpath = "//table/tbody/tr[@class='bustr1']")
@@ -29,7 +28,7 @@ public class SearchResults extends TestBase {
     public SearchResults(WebDriver driver) throws Exception {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        logger.info("initializing.."+getClass().getName());
+        logger.info("initializing.." + getClass().getName());
         if (!driver.getTitle().contains("BusOnlineTicket.com")) {
             throw new IllegalStateException("This is not | BusOnlineTicket.com" +
                     " current page is: " + driver.getTitle());
@@ -38,7 +37,7 @@ public class SearchResults extends TestBase {
     }
 
     public Passanger_details findMinimumPricePricedBusAndSelect() {
-        logger.info("results.size()"+results.size());
+        logger.info("results.size()" + results.size());
         double minPrice = Double.MAX_VALUE;
         WebElement minPricedBusResult = null;
 
@@ -61,9 +60,9 @@ public class SearchResults extends TestBase {
         //select6SeatsOrAllSeatsIfAvailableSeatsAreLesserThan6
         List<WebElement> availableSeats = minPricedBusResult.findElements(By.xpath("//following::tbody/tr/td/div[@class='seat_available']"));
 
-            for (int i = 0; i <Math.min(6,availableSeats.size()) ; i++) {
-                availableSeats.get(i).click();
-            }
+        for (int i = 0; i < Math.min(6, availableSeats.size()); i++) {
+            availableSeats.get(i).click();
+        }
 
         btnproceed.click();
         return new Passanger_details(driver);

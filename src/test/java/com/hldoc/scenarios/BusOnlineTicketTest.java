@@ -20,15 +20,14 @@ import org.testng.asserts.SoftAssert;
 public class BusOnlineTicketTest {
 
     @Test()
-    @Parameters({"browserName","isRemoteDriver"})
-    public void test_least_adult_cost_and_select_max_of_6_seats_or_all_seats_if_less_than_6(String browserName,Boolean isRemoteDriver) throws Exception {
+    @Parameters({"browserName", "isRemoteDriver"})
+    public void test_least_adult_cost_and_select_max_of_6_seats_or_all_seats_if_less_than_6(String browserName, Boolean isRemoteDriver) throws Exception {
         TestBase testBase = new TestBase();
         testBase.startApp(browserName, isRemoteDriver);
         Logger logger = LoggerFactory.getLogger(BusOnlineTicketTest.class);
         logger.info("executing test1...");
         logger.debug("debugging test1...");
         logger.warn("warning test1..");
-
         logger.debug("executing test1...");
 
         BrowserFactory instance = BrowserFactory.getInstance();
@@ -40,8 +39,6 @@ public class BusOnlineTicketTest {
 
         SearchResults searchResults = homePage.seachBus("2020-07-20", "Cameron Highlands", "Kuala Lumpur");
         helper.takePageVisibleScreenshot();
-
-
 
         Passanger_details passanger_details = searchResults.findMinimumPricePricedBusAndSelect();
         passanger_details.enterPassangerDetailsAndProceed("shravan", "1234567890", "shravanrai.bist@gmail.com", "shravanrai.bist@gmail.com");

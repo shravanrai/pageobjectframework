@@ -1,81 +1,41 @@
 package com.hldoc.scenarios;
 
-import com.hldoc.helper.shravan1BrowserFactory;
-import org.openqa.selenium.WebDriver;
+import net.rcarz.jiraclient.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
+import java.net.MalformedURLException;
 
 public class AppTest3 {
 
-    Logger logger = LoggerFactory.getLogger(AppTest3.class);
-    private WebDriver driver;
+    private Logger logger;
 
-    public static void main(String[] args) {
-
-        /*ArrayList<Integer> integerArrayList = new ArrayList<>();
-        integerArrayList.*/
-        //checkException(args);
+    public AppTest3() {
+        logger = LoggerFactory.getLogger(AppTest3.class);
     }
 
-    @BeforeClass
-    @Parameters("browser")
-    public void setup(String browser) {
-        System.setProperty("webdriver.chrome.driver", "/home/shravan/Documents/selenium4_browsers/chromedriver_linux64/75/chromedriver_linux64/chromedriver");
-        ThreadLocal<WebDriver> WebDriver = new ThreadLocal<>();
-        WebDriver.set(new shravan1BrowserFactory().getBrowser(browser));
-        driver = WebDriver.get();
-     //   driver=new ChromeDriver();
+    @Test
+    public void testName() {
+        System.out.println("AppTest3.testName");
+        Assert.assertTrue(false);
     }
 
-/*
-    public static void checkException(String[] args) {
-        new FileNotFoundException();
-        try {
-            logger.info("");
-            new IOException();
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
-            logger.info("args = " + args);
+    @AfterMethod
+    public void tearDown(ITestResult result) throws MalformedURLException, JiraException {
+        System.out.println("AppTest3.tearDown");
+        if (result.getStatus() == ITestResult.FAILURE) {
+
+
+            BasicCredentials basicCredentials = new BasicCredentials("admin", "admin");
+            JiraClient jiraClient = new JiraClient("https://testautomationworld.atlassian.net", basicCredentials);
+            Issue issue = jiraClient.createIssue("Refresh", "Bug").field(Field.SUMMARY, result.getMethod().getMethodName() + "is failed due to" +
+                    result.getThrowable().toString()).field(Field.DESCRIPTION, "get the description").execute();
+            logger.info("issue created in jira: " + issue);
         }
-    }
-*/
-
-    @AfterClass
-    public void tearDown() {
-        driver.close();
-    }
-
-    @Test()
-    public void test1() throws InterruptedException {
-        logger.info("AppTest.test1");
-        logger.info(String.valueOf(Thread.currentThread().getId()));
-        logger.info(System.getProperty("user.dir"));
-        driver.get("http://exotel.com");
-        //Thread.sleep(3000l);
-        logger.info(driver.getTitle());
-    }
-
-    @Test
-    public void test2() throws InterruptedException {
-        logger.info("AppTest.test2");
-        logger.info(String.valueOf(Thread.currentThread().getId()));
-        driver.get("http://seleniumhq.org");
-        //Thread.sleep(3000l);
-        logger.info(driver.getTitle());
 
     }
-
-    @Test
-    public void test3() throws InterruptedException {
-        logger.info("AppTest.test3");
-        logger.info(String.valueOf(Thread.currentThread().getId()));
-        driver.get("http://busonlineticket.com");
-        //Thread.sleep(3000l);
-        logger.info(driver.getTitle());
-
-    }
-
 }

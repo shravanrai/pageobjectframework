@@ -9,37 +9,35 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.logging.Logger;
 
 public class Passanger_details {
-    Logger logger=Logger.getLogger(Helper.class.getName());
-
     public static WebDriver driver;
-
+    Logger logger = Logger.getLogger(Helper.class.getName());
     //Full name
-    @FindBy(id="ContentPlaceHolder1_txtName")
+    @FindBy(id = "ContentPlaceHolder1_txtName")
     WebElement txtName;
 
     //Mobile no.
-    @FindBy(id="ContentPlaceHolder1_txtPhone")
+    @FindBy(id = "ContentPlaceHolder1_txtPhone")
     WebElement txtPhone;
 
     //email
-    @FindBy(id="ContentPlaceHolder1_txtEmail")
+    @FindBy(id = "ContentPlaceHolder1_txtEmail")
     WebElement txtEmail;
 
     //ReEnter email
-    @FindBy(id="ContentPlaceHolder1_txtEmail1")
+    @FindBy(id = "ContentPlaceHolder1_txtEmail1")
     WebElement txtEmail1;
 
     //btnProceedPayment //submit
-    @FindBy(id="ContentPlaceHolder1_btnProceedPayment")
+    @FindBy(id = "ContentPlaceHolder1_btnProceedPayment")
     WebElement btnProceedPayment;
 
-    public Passanger_details(WebDriver driver){
-        PageFactory.initElements(driver,this);
-        this.driver=driver;
+    public Passanger_details(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
     }
 
     //EnterPassangerDetailsAndProceed
-    public void enterPassangerDetailsAndProceed(String txtName,String txtPhone,String txtEmail,String txtEmail1){
+    public void enterPassangerDetailsAndProceed(String txtName, String txtPhone, String txtEmail, String txtEmail1) {
         this.txtName.sendKeys(txtName);
         this.txtPhone.sendKeys(txtPhone);
         this.txtEmail.sendKeys(txtEmail);

@@ -12,27 +12,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.logging.Logger;
 
 public class HomePage {
-    private final WebDriverWait webDriverWait;
-    Logger logger=Logger.getLogger(Helper.class.getName());
-
     public static WebDriver driver;
-    Helper helper=null;
-
+    private final WebDriverWait webDriverWait;
+    @FindBy(id = "btnBusSearchNew")
+    public WebElement btnBusSearchNew;  //temporarily made public to test hlper hover
+    Logger logger = Logger.getLogger(Helper.class.getName());
+    Helper helper = null;
     @FindBy(id = "ContentPlaceHolder1_txtDepartDate")
     private WebElement txtDepartDate;
-
     @FindBy(id = "txtOrigin")
     private WebElement txtOrigin;
     @FindBy(xpath = "//*[@id='divSearchResultFrom']/ul/li[1]/ul/li[1]")
     private WebElement txtOriginOption;
-
     @FindBy(id = "txtDestination")
     private WebElement txtDestination;
     @FindBy(xpath = "(//*[@id='divSearchResultTo']/ul/li/ul/li/div)[1]")
     private WebElement txtDestinationOption;
-
-    @FindBy(id = "btnBusSearchNew")
-    public WebElement btnBusSearchNew;  //temporarily made public to test hlper hover
 
     public HomePage(WebDriver driver) throws Exception {
         PageFactory.initElements(driver, this);
@@ -41,7 +36,7 @@ public class HomePage {
             throw new IllegalStateException("This is not Bus Online Booking Services at BusOnlineTicket.com Malaysia & Singapore" +
                     " current page is: " + driver.getCurrentUrl());
         }
-         webDriverWait = new WebDriverWait(driver, 5);
+        webDriverWait = new WebDriverWait(driver, 5);
     }
 
 
@@ -62,7 +57,7 @@ public class HomePage {
     public void settxtOriginOption(String txtOrigin) throws InterruptedException {
         this.txtOrigin.clear();
         this.txtOrigin.sendKeys(txtOrigin);
-        if(!this.txtOrigin.getText().equalsIgnoreCase(txtOrigin)){
+        if (!this.txtOrigin.getText().equalsIgnoreCase(txtOrigin)) {
             this.txtOrigin.clear();
             this.txtOrigin.sendKeys(txtOrigin);
         }

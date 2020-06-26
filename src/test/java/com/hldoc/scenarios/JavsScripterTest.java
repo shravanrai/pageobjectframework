@@ -14,11 +14,10 @@ public class JavsScripterTest extends TestBase {
         // To initialize the JS object.
         JavascriptExecutor JS = (JavascriptExecutor) driver;
 // To get the site title.
-        String title = (String)JS.executeScript("return document.title");
+        String title = (String) JS.executeScript("return document.title");
         System.out.println("Title of the webpage : " + title);
 
         //String title = (String)JS.executeScript("return document");
-
 
 
     }
