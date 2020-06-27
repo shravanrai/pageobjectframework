@@ -49,7 +49,7 @@ public class BrowserFactory {
         logger = LoggerFactory.getLogger(BrowserFactory.class);
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(new File("src/test/resource.properties")));
+            properties.load(new FileInputStream(new File("src/test/resources/resource.properties")));
             BS_BROWSER_NAME = properties.getProperty("BS_BROWSER_NAME");
             BS_BROWSER_VERSION = properties.getProperty("BS_BROWSER_VERSION");
             BS_OS= properties.getProperty("BS_OS");
@@ -116,7 +116,7 @@ public class BrowserFactory {
                 if (isRemoteDriver) {
                     webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
                 } else {
-                    System.setProperty("webdriver.chrome.driver", "/home/shravan/Documents/selenium4_browsers/chromedriver_linux64/75/chromedriver_linux64/chromedriver");
+                    System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver_linux64/75/chromedriver");
                     webDriver.set(new ChromeDriver());
                 }
                 break;
@@ -140,7 +140,7 @@ public class BrowserFactory {
                 if (isRemoteDriver) {
                     webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
                 } else {
-                    System.setProperty("webdriver.gecko.driver", "/home/shravan/Documents/selenium4_browsers/geckodriver-v0.26.0-linux64/geckodriver");
+                    System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver-v0.26.0-linux64/geckodriver");
                     webDriver.set(new FirefoxDriver());
                 }
                 break;
