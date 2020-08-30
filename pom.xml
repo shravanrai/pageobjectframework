@@ -16,9 +16,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+            <jre.level>1.8</jre.level>
+            <jdk.level>1.8</jdk.level>
+            <aspectj.version>1.9.2</aspectj.version>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.0.0</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Core selenium jars -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -137,6 +145,11 @@
             <version>0.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -162,6 +175,10 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
                     <configuration>
+                        <testFailureIgnore>true</testFailureIgnore>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
                         <suiteXmlFiles>
                             <suiteXmlFile>src/test/suite/bookbusTest.xml</suiteXmlFile>
                         </suiteXmlFiles>

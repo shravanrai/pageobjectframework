@@ -1,7 +1,9 @@
 package com.hldoc.scenarios;
 
 import com.hldoc.helper.shravan1BrowserFactory;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
@@ -9,19 +11,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class AppTest {
 
     Logger logger = LoggerFactory.getLogger(AppTest.class);
     private WebDriver driver;
 
-    public static void main(String[] args) {
 
-        /*ArrayList<Integer> integerArrayList = new ArrayList<>();
-        integerArrayList.*/
-        //checkException(args);
-        System.out.println("AppTest.main");
-    }
-
+/*
     @BeforeClass
     @Parameters("browser")
     public void setup(String browser) {
@@ -31,7 +30,7 @@ public class AppTest {
         //   driver=new ChromeDriver();
     }
 
-/*
+*//*
     public static void checkException(String[] args) {
         new FileNotFoundException();
         try {
@@ -41,7 +40,7 @@ public class AppTest {
             logger.info("args = " + args);
         }
     }
-*/
+*//*
 
     @AfterClass
     public void tearDown() {
@@ -76,6 +75,6 @@ public class AppTest {
         //Thread.sleep(3000l);
         logger.info(driver.getTitle());
 
-    }
+    }*/
 
 }

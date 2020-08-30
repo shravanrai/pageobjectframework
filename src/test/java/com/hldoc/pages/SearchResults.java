@@ -1,17 +1,15 @@
 package com.hldoc.pages;
 
-import com.hldoc.helper.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-public class SearchResults extends TestBase {
-    public static WebDriver driver;
+public class SearchResults extends PageBase {
+   // public static WebDriver driver;
     Logger logger = Logger.getLogger(SearchResults.class.getName());
     WebElement resultToBeProceededWith = null;
 
@@ -25,6 +23,18 @@ public class SearchResults extends TestBase {
     @FindBy(xpath = "//*[@id='content']//div[contains(text(),'Estimated Trip Duration ')]")
     WebElement estimatedTripDuration;
 
+    public SearchResults(WebDriver driver) {
+        super(driver);
+    }
+
+    public SearchResults() {
+        super(driver);
+    }
+
+
+
+
+/*
     public SearchResults(WebDriver driver) throws Exception {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -35,6 +45,19 @@ public class SearchResults extends TestBase {
         }
 
     }
+*/
+
+
+/*    public SearchResults(EventFiringWebDriver driver) throws Exception {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+        logger.info("initializing.." + getClass().getName());
+        if (!driver.getTitle().contains("BusOnlineTicket.com")) {
+            throw new IllegalStateException("This is not | BusOnlineTicket.com" +
+                    " current page is: " + driver.getTitle());
+        }
+
+    }*/
 
     public Passanger_details findMinimumPricePricedBusAndSelect() {
         logger.info("results.size()" + results.size());

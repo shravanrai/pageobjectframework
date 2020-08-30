@@ -42,6 +42,8 @@ public class Helper {
             actions.moveToElement(ele).moveToElement(ele).perform();
             Thread.sleep(100l);
         }
+
+        
     }
 
     public void takeElementScreenshot(WebElement ele) throws IOException {

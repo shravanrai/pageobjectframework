@@ -5,15 +5,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.logging.Logger;
 
-public class HomePage {
-    public static WebDriver driver;
-    private final WebDriverWait webDriverWait;
+public class HomePage extends PageBase {
+    //public static WebDriver driver;
+    //private final WebDriverWait webDriverWait;
     @FindBy(id = "btnBusSearchNew")
     public WebElement btnBusSearchNew;  //temporarily made public to test hlper hover
     Logger logger = Logger.getLogger(Helper.class.getName());
@@ -29,7 +27,22 @@ public class HomePage {
     @FindBy(xpath = "(//*[@id='divSearchResultTo']/ul/li/ul/li/div)[1]")
     private WebElement txtDestinationOption;
 
-    public HomePage(WebDriver driver) throws Exception {
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
+
+/*    public HomePage(WebDriver driver) throws Exception {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+        if (!driver.getTitle().equals("Bus Online Booking Services at BusOnlineTicket.com Malaysia & Singapore")) {
+            throw new IllegalStateException("This is not Bus Online Booking Services at BusOnlineTicket.com Malaysia & Singapore" +
+                    " current page is: " + driver.getCurrentUrl());
+        }
+        webDriverWait = new WebDriverWait(driver, 5);
+    }*/
+
+/*
+    public HomePage(EventFiringWebDriver driver) throws Exception {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         if (!driver.getTitle().equals("Bus Online Booking Services at BusOnlineTicket.com Malaysia & Singapore")) {
@@ -38,6 +51,7 @@ public class HomePage {
         }
         webDriverWait = new WebDriverWait(driver, 5);
     }
+*/
 
 
     public SearchResults seachBus(String txtDepartDate, String txtOrigin, String txtDestination) throws Exception {
@@ -45,7 +59,9 @@ public class HomePage {
         settxtOriginOption(txtOrigin);
         settxtDestinationOption(txtDestination);
         this.btnBusSearchNew.click();
-        return new SearchResults(driver);
+       // return new SearchResults(driver);
+      return new SearchResults();
+
     }
 
     public void settxtDestinationOption(String txtDestination) throws InterruptedException {

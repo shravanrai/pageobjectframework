@@ -5,11 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.logging.Logger;
 
-public class Passanger_details {
-    public static WebDriver driver;
+public class Passanger_details extends PageBase {
+   // public static WebDriver driver;
     Logger logger = Logger.getLogger(Helper.class.getName());
     //Full name
     @FindBy(id = "ContentPlaceHolder1_txtName")
@@ -32,9 +33,18 @@ public class Passanger_details {
     WebElement btnProceedPayment;
 
     public Passanger_details(WebDriver driver) {
+        super(driver);
+    }
+
+/*    public Passanger_details(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+
+    public Passanger_details(EventFiringWebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }*/
 
     //EnterPassangerDetailsAndProceed
     public void enterPassangerDetailsAndProceed(String txtName, String txtPhone, String txtEmail, String txtEmail1) {

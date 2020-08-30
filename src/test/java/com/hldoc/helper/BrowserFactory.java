@@ -1,5 +1,6 @@
 package com.hldoc.helper;
 
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,8 +8,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ThreadGuard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +28,7 @@ public class BrowserFactory {
     private static BrowserFactory instance = null;
     private final Logger logger;
     private String BS_URL;
-    ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    WebDriver webDriver;
 
     public  String BS_USERNAME = "shravanrai1";
     public  String BS_AUTOMATE_KEY = "WrxW19XGynPLsq7BqrbF";
@@ -98,7 +101,8 @@ public class BrowserFactory {
                 browserstackOptions.put("accessKey", BS_AUTOMATE_KEY);
                 caps.setCapability("bstack:options", browserstackOptions);
                 logger.info(BS_URL);
-                webDriver.set(new RemoteWebDriver(new URL(BS_URL), caps));
+                //webDriver.set(new RemoteWebDriver(new URL(BS_URL), caps));
+                webDriver=new RemoteWebDriver(new URL(BS_URL), caps);
                 break;
             case "chrome":
                 caps = new DesiredCapabilities();
@@ -109,15 +113,18 @@ public class BrowserFactory {
                 chOptions.addArguments("--disable-plugins", "--disable-extensions",
                         "--disable-popup-blocking");
                 caps.setCapability("applicationCacheEnabled", false);
+                caps.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
                 caps.setBrowserName(BrowserType.CHROME);
                 caps.setCapability("name", "myChromeTestName");
                 caps.merge(chOptions);
 
                 if (isRemoteDriver) {
-                    webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
+                  //  webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
                 } else {
                     System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver_linux64/75/chromedriver");
-                    webDriver.set(new ChromeDriver());
+
+                    //webDriver.set( ThreadGuard.protect(new ChromeDriver()));
+                    webDriver=ThreadGuard.protect(new ChromeDriver());
                 }
                 break;
 
@@ -138,10 +145,12 @@ public class BrowserFactory {
                 caps.setCapability("tz", "Asia/Calcutta");
                 caps.merge(ffOptions);
                 if (isRemoteDriver) {
-                    webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
+                    //webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
                 } else {
                     System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver-v0.26.0-linux64/geckodriver");
-                    webDriver.set(new FirefoxDriver());
+                   // webDriver.set( ThreadGuard.protect(new FirefoxDriver()));
+                    webDriver=ThreadGuard.protect(new FirefoxDriver());
+
                 }
                 break;
 
@@ -150,7 +159,7 @@ public class BrowserFactory {
                 caps.setBrowserName(BrowserType.OPERA);
                 OperaOptions operaOptions = new OperaOptions();
                 caps.merge(operaOptions);
-                webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
+                //webDriver.set(new RemoteWebDriver(new URL(ZALENIUM_URL), caps));
                 break;
         }
         logger.info("browserName : " + caps.getBrowserName());
@@ -158,6 +167,7 @@ public class BrowserFactory {
     }
 
     public WebDriver getDriver() {
-        return webDriver.get();
+       // return webDriver.get();
+        return webDriver;
     }
 }

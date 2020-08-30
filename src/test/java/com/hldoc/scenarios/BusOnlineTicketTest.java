@@ -3,11 +3,14 @@ package com.hldoc.scenarios;
 import com.hldoc.helper.BrowserFactory;
 import com.hldoc.helper.Helper;
 import com.hldoc.helper.TestBase;
+import com.hldoc.helper.CustomWebDriverEventListener;
 import com.hldoc.pages.HomePage;
+import com.hldoc.pages.PageBase;
 import com.hldoc.pages.Passanger_details;
 import com.hldoc.pages.SearchResults;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -19,9 +22,11 @@ import org.testng.asserts.SoftAssert;
 
 public class BusOnlineTicketTest {
 
+
     @Test()
     @Parameters({"browserName", "isRemoteDriver"})
     public void test_least_adult_cost_and_select_max_of_6_seats_or_all_seats_if_less_than_6(String browserName, Boolean isRemoteDriver) throws Exception {
+
         TestBase testBase = new TestBase();
         testBase.startApp(browserName, isRemoteDriver);
         Logger logger = LoggerFactory.getLogger(BusOnlineTicketTest.class);
@@ -31,11 +36,16 @@ public class BusOnlineTicketTest {
         logger.debug("executing test1...");
 
         BrowserFactory instance = BrowserFactory.getInstance();
-        WebDriver driver = instance.getDriver();
-        SoftAssert softAssert = new SoftAssert();
+        WebDriver driver0 = instance.getDriver();
+
+        EventFiringWebDriver driver = new EventFiringWebDriver(driver0);
+        CustomWebDriverEventListener webDriverEventListener = new CustomWebDriverEventListener();
+        driver.register(webDriverEventListener);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         Helper helper = new Helper(driver);
+        PageBase pageBase = new PageBase(driver);
         HomePage homePage = new HomePage(driver);
+        SoftAssert softAssert = new SoftAssert();
 
         SearchResults searchResults = homePage.seachBus("2020-07-20", "Cameron Highlands", "Kuala Lumpur");
         helper.takePageVisibleScreenshot();
@@ -49,6 +59,7 @@ public class BusOnlineTicketTest {
 
         softAssert.assertEquals(text, "Please select a payment method", "Alert message is not as expected.");
         alert.accept();
+        driver.unregister(webDriverEventListener);
         softAssert.assertAll();
         testBase.tearDown();
     }
